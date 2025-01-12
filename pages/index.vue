@@ -1,7 +1,10 @@
 <script setup>
+const runtimeConfig = useRuntimeConfig();
+const apiURL = runtimeConfig.public.API_URL;
+
 const tasks = ref([]);
 onMounted(async () => {
-  let response = await fetch("http://127.0.0.1:8000/api/get-tasks");
+  let response = await fetch(`${apiURL}/api/get-tasks`);
   response = await response.json();
   tasks.value = response;
 });
@@ -9,7 +12,7 @@ onMounted(async () => {
 const listItems = ref([]);
 
 async function addTask(title, description) {
-  const response = await fetch("http://127.0.0.1:8000/api/add-task", {
+  const response = await fetch(`${apiURL}/api/add-task`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -32,7 +35,7 @@ async function addTask(title, description) {
 async function editTask(id) {
   const currentTask = listItems.value.find((item) => item.id === id);
 
-  const response = await fetch("http://127.0.0.1:8000/api/update-task", {
+  const response = await fetch(`${apiURL}/api/update-task`, {
     method: "PUT",
     headers: {
       "Content-Type": "application/json",
@@ -57,7 +60,7 @@ async function editTask(id) {
   }
 }
 async function deleteTask(id) {
-  const response = await fetch("http://127.0.0.1:8000/api/delete-task", {
+  const response = await fetch(`${apiURL}/api/delete-task`, {
     method: "DELETE",
     headers: {
       "Content-Type": "application/json",
@@ -74,7 +77,7 @@ async function deleteTask(id) {
 </script>
 
 <template>
-  <h1 class="wtf">чо?</h1>
+  <h1 class="title">Скоро будет красиво</h1>
   <AddingForm v-on:submit="addTask" />
   <List>
     <template v-slot:list-items>
@@ -108,8 +111,9 @@ async function deleteTask(id) {
 * {
   font-family: "Montserrat", sans-serif;
 }
-.wtf {
+.title {
   line-height: 32px;
+  text-align: center;
   margin: 16px 0;
 }
 </style>

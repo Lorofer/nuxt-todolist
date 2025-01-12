@@ -8,5 +8,10 @@ export default defineNuxtConfig({
       {name: "Montserrat", provider: "google"},
     ]
   },
-  css: ['~/assets/main.css']
+  css: ['~/assets/main.css'],
+  runtimeConfig: {
+    public: {
+      API_URL: process.env.NUXT_API_URL,
+    },
+  },
 })
