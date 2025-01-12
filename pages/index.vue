@@ -112,7 +112,8 @@ async function deleteTask(id) {
   font-family: "Montserrat", sans-serif;
 }
 .title {
-  line-height: 32px;
+  line-height: clamp(16px, calc(100vw * 0.08), 32px);
+  font-size: clamp(16px, calc(100vw * 0.08), 32px);
   text-align: center;
   margin: 16px 0;
 }
